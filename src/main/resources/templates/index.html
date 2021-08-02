@@ -7,7 +7,23 @@
 
 <body>
 <p>
-<a href="/bank.com/card-number" class="btn btn-outline-dark">Withdrawal</a>
-
+    <a href="/bank.com/card-number" class="btn btn-outline-dark">Withdrawal</a>
+    <a href="/accounts/generate" class="btn btn-outline-dark">Generate accounts</a>
+</p>
+<table class="table table-striped">
+    <tbody th:if="${not #lists.isEmpty(accountsList)}">
+    <th:block th:each="ac : ${accountsList}">
+        <tr>
+            <td th:text="${ac.number}"></td>
+            <td th:text="${ac.balance}"></td>
+        </tr>
+    </th:block>
+    </tbody>
+    <tbody th:if="${#lists.isEmpty(accountsList)}">
+    <tr>
+        <td>No accounts found.</td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>
