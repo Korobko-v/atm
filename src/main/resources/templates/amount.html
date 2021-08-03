@@ -1,10 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/5.0.1/css/bootstrap.css">
 
+<body>
+<form method="post" action="/bank.com/amount">
+    <label>Amount:
+        <input type="number" name="amount">
+    </label>
+    <p>
+        <input type="submit" class="btn btn-outline-success">
+    </p>
+</form>
 </body>
 </html>

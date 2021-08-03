@@ -23,5 +23,9 @@ public interface AccountRepository extends JpaRepository<Account, Integer> {
         return account;
     }
 
+    Account findAccountByNumber(String number);
+
+    Account findAccountByNumberAndPin(String number, String pin);
+
 
 }

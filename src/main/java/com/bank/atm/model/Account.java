@@ -22,13 +22,9 @@ public class Account {
     private Integer id;
 
     @Column
-    @Length(min = 16, max = 16)
-    @Positive
     private String number;
 
     @Column
-    @Length(min = 4, max = 4)
-    @Positive
     private String pin;
 
     @Column
