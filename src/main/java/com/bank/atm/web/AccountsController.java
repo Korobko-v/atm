@@ -81,21 +81,19 @@ public class AccountsController {
 
     @GetMapping("/bank.com/amount")
     public String showAmountForm() {
+
         return "amount";
     }
+
     @PostMapping("/bank.com/amount")
-    public String handleAmountForm(String str) {
-        int sum = 0;
-        try {
-            sum = Integer.parseInt(str);
-        }
-        catch (Exception e) {
-            return "amount";
-        }
+    public String handleAmountForm(@RequestParam Integer sum) {
         if (accounts.findAccountByNumber(currentNumber).getBalance() - sum < 0) {
-            return "amount";
+            throw new IllegalStateException("Not enough money to debit");
         }
-        accounts.findAccountByNumber(currentNumber).setBalance(accounts.findAccountByNumber(currentNumber).getBalance() - sum);
+        accounts.debit(accounts.findAccountByNumber(currentNumber), sum);
+
+//        accounts.findAccountByNumber(currentNumber).setBalance(balance);
+//        model.addAttribute("balance", accounts.findAccountByNumber(currentNumber).getBalance());
         return "success";
     }
 

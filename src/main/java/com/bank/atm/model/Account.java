@@ -31,6 +31,7 @@ public class Account {
     @Positive
     private Integer balance;
 
+
     public Account(String number, String pin, Integer balance) {
         this.number = number;
         this.pin = pin;
