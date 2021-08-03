@@ -1,14 +1,11 @@
 package com.bank.atm.model;
 
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
-import javax.validation.constraints.Positive;
 
 @Entity
 @Table(name = "accounts")
@@ -28,7 +25,6 @@ public class Account {
     private String pin;
 
     @Column
-    @Positive
     private Integer balance;
 
 

@@ -12,8 +12,8 @@ import javax.persistence.Persistence;
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = "com.bank.atm.repositories")
 public class AppConfig {
-    @Bean
-    public EntityManagerFactory entityManagerFactory() {
-        return Persistence.createEntityManagerFactory("TestPersistenceUnit");
-    }
+//    @Bean
+//    public EntityManagerFactory entityManagerFactory() {
+//        return Persistence.createEntityManagerFactory("TestPersistenceUnit");
+//    }
 }

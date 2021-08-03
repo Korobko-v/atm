@@ -3,6 +3,7 @@ package com.bank.atm.web;
 import com.bank.atm.model.Account;
 import com.bank.atm.repositories.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,12 +37,6 @@ public class AccountsController {
         return "redirect:/";
     }
 
-//    @GetMapping("/bank.com/card-number")
-//    public String withdrawal(Model model) {
-//        List<Account> accountsList = accounts.findAll();
-//        model.addAttribute("accountsList", accountsList);
-//        return "card_number";
-//    }
 
     @GetMapping("/bank.com/card-number")
     public String showNumberForm() {
@@ -60,13 +55,13 @@ public class AccountsController {
             currentNumber = number;
 //        accountsSession.setAccountId(account.getId());
 //        accountsSession.setNumber(account.getNumber());
-        return "pin";
+        return showPinForm();
     }
 
-//    @GetMapping("/bank.com/pin")
-//    public String showPinForm() {
-//        return "pin";
-//    }
+    @GetMapping("/bank.com/pin")
+    public String showPinForm() {
+        return "pin";
+    }
 
     @PostMapping("/bank.com/pin")
     public String handlePinForm(@RequestParam String pin) {
@@ -76,7 +71,7 @@ public class AccountsController {
             //result.addError(new FieldError("account", "pin", "Wrong PIN-code"));
             return "pin";
         }
-        return "amount";
+        return showAmountForm();
     }
 
     @GetMapping("/bank.com/amount")
@@ -86,7 +81,7 @@ public class AccountsController {
     }
 
     @PostMapping("/bank.com/amount")
-    public String handleAmountForm(@RequestParam Integer sum) {
+    public String handleAmountForm(@RequestParam (required = false, defaultValue = "10") Integer sum) {
         if (accounts.findAccountByNumber(currentNumber).getBalance() - sum < 0) {
             throw new IllegalStateException("Not enough money to debit");
         }

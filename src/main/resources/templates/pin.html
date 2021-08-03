@@ -4,46 +4,64 @@
 
 <body>
 <form method="post" action="/bank.com/pin" name="pin">
-    <label>Pin:
-        <input type="text" name="pin">
-        <input type="button" class="fbutton"
-               name="1" value="1" id="1"
-               onClick="document.pin.pin.value+='1'"/>
-        <input type="button" class="fbutton"
-               name="2" value="2" id="2"
-               onClick="document.pin.pin.value+='2'"/>
-        <input type="button" class="fbutton"
-               name="3" value="3" id="3"
-               onClick="document.pin.pin.value+='3'"/>
-        <input type="button" class="fbutton"
-               name="4" value="4" id="4"
-               onClick="document.pin.pin.value+='4'"/>
-        <input type="button" class="fbutton"
-               name="5" value="5" id="5"
-               onClick="document.pin.pin.value+='5'"/>
-        <input type="button" class="fbutton"
-               name="6" value="6" id="6"
-               onClick="document.pin.pin.value+='6'"/>
-        <input type="button" class="fbutton"
-               name="7" value="7" id="7"
-               onClick="document.pin.pin.value+='7'"/>
-        <input type="button" class="fbutton"
-               name="8" value="8" id="8"
-               onClick="document.pin.pin.value+='8'"/>
-        <input type="button" class="fbutton"
-               name="9" value="9" id="9"
-               onClick="document.pin.pin.value+='9'"/>
-        <input type="button" class="fbutton"
-               name="0" value="0" id="0"
-               onClick="document.pin.pin.value+='0'"/>
-        <input type="button" class="fbutton"
-               name="<" value="<" id="11"
-               onClick="document.pin.pin.value = document.pin.pin.value.substring(0, document.pin.pin.value.length-1)"/>
-        <input type="button" class="fbutton"
-               name="CE" value="CE" id="12"
-               onClick="document.pin.pin.value=''"/>
-        <input type="submit" class="btn btn-outline-success">
-        <a href="/bank.com/card-number" class="btn btn-dark btn-sm">Cancel</a>
+    <label>PIN-код:
+        <input type="number" name="pin">
+
+        <p>
+            <label>
+                <input type="button" class="fbutton"
+                       name="1" value="1" id="1"
+                       onClick="document.pin.pin.value+='1'"/>
+                <input type="button" class="fbutton"
+                       name="2" value="2" id="2"
+                       onClick="document.pin.pin.value+='2'"/>
+                <input type="button" class="fbutton"
+                       name="3" value="3" id="3"
+                       onClick="document.pin.pin.value+='3'"/>
+                <input type="submit" class="btn btn-dark btn-sm" name="Enter" value="Enter">
+            </label>
+        </p>
+        <p>
+            <label>
+                <input type="button" class="fbutton"
+                       name="4" value="4" id="4"
+                       onClick="document.pin.pin.value+='4'"/>
+                <input type="button" class="fbutton"
+                       name="5" value="5" id="5"
+                       onClick="document.pin.pin.value+='5'"/>
+                <input type="button" class="fbutton"
+                       name="6" value="6" id="6"
+                       onClick="document.pin.pin.value+='6'"/>
+                <a href="/bank.com/card-number" class="btn btn-dark btn-sm">Cancel</a>
+            </label>
+        </p>
+        <p>
+            <label>
+                <input type="button" class="fbutton"
+                       name="7" value="7" id="7"
+                       onClick="document.pin.pin.value+='7'"/>
+                <input type="button" class="fbutton"
+                       name="8" value="8" id="8"
+                       onClick="document.pin.pin.value+='8'"/>
+                <input type="button" class="fbutton"
+                       name="9" value="9" id="9"
+                       onClick="document.pin.pin.value+='9'"/>
+            </label>
+        </p>
+        <p>
+            <label>
+                <input type="button" class="fbutton"
+                       name="CE" value="CE" id="12"
+                       onClick="document.pin.pin.value=''"/>
+                <input type="button" class="fbutton"
+                       name="0" value="0" id="0"
+                       onClick="document.pin.pin.value+='0'"/>
+                <input type="button" class="fbutton"
+                       name="<" value="<" id="11"
+                       onClick="document.pin.pin.value = document.pin.pin.value.substring(0, document.pin.pin.value.length-1)"/>
+            </label>
+        </p>
+
     </label>
 
 </form>
