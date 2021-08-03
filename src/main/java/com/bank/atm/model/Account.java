@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "accounts")
@@ -22,6 +24,9 @@ public class Account {
     private String number;
 
     @Column
+    @Size(min = 4, max = 4, message = "PIN should cosist of 4 digits")
+    @Pattern(regexp = "[0-9]*",
+            message = "PIN should consist of digits")
     private String pin;
 
     @Column

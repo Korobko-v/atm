@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Random;
 
 @Controller
@@ -55,23 +56,29 @@ public class AccountsController {
             currentNumber = number;
 //        accountsSession.setAccountId(account.getId());
 //        accountsSession.setNumber(account.getNumber());
-        return showPinForm();
+        return "pin";
     }
 
     @GetMapping("/bank.com/pin")
-    public String showPinForm() {
+    public String showPinForm(@ModelAttribute("form")
+                                          PinForm form) {
         return "pin";
     }
 
     @PostMapping("/bank.com/pin")
-    public String handlePinForm(@RequestParam String pin) {
-        Account account = accounts.findAccountByNumberAndPin(currentNumber, pin);
+    public String handlePinForm(@ModelAttribute("form")
+                                    @Valid
+                                            PinForm form,
+                                BindingResult result) {
+        Account account = accounts.findAccountByNumber(currentNumber);
 
-        if (account== null) {
-            //result.addError(new FieldError("account", "pin", "Wrong PIN-code"));
+        if (!account.getPin().equals(form.getPin())) {
+            result.addError(new FieldError("form", "pin", "Wrong PIN-code"));
+        }
+        if (result.hasErrors()) {
             return "pin";
         }
-        return showAmountForm();
+        return "amount";
     }
 
     @GetMapping("/bank.com/amount")

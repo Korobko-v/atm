@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/5.0.1/css/bootstrap.css">
-
+<script type="text/javascript" src="/webjars/jquery/3.5.1/jquery.min.js"></script>
 <body>
-<form method="post" action="/bank.com/pin" name="pin">
+<form method="post" action="/bank.com/pin" name="pin" enctype="application/x-www-form-urlencoded"th:object="${form}">
     <label>PIN-код:
-        <input type="number" name="pin">
-
+        <input type="number" name="pin" th:value="${form.pin}">
+        <div th:each="error : ${#fields.errors('pin')}" th:text="${error}" class="alert alert-danger" role="alert"></div>
         <p>
             <label>
                 <input type="button" class="fbutton"
