@@ -38,7 +38,14 @@
     <input type="button" class="fbutton"
            name="0" value="0" id="0"
            onClick="document.number.number.value+='0'"/>
+    <input type="button" class="fbutton"
+           name="<" value="<" id="11"
+           onClick="document.number.number.value = document.number.number.value.substring(0, document.number.number.value.length-1)"/>
+    <input type="button" class="fbutton"
+           name="CE" value="CE" id="12"
+           onClick="document.number.number.value=''"/>
     <input type="submit" class="btn btn-outline-success">
+        <a href="/" class="btn btn-dark btn-sm">Cancel</a>
 </form>
 
 

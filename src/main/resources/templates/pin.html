@@ -36,8 +36,14 @@
         <input type="button" class="fbutton"
                name="0" value="0" id="0"
                onClick="document.pin.pin.value+='0'"/>
-
+        <input type="button" class="fbutton"
+               name="<" value="<" id="11"
+               onClick="document.pin.pin.value = document.pin.pin.value.substring(0, document.pin.pin.value.length-1)"/>
+        <input type="button" class="fbutton"
+               name="CE" value="CE" id="12"
+               onClick="document.pin.pin.value=''"/>
         <input type="submit" class="btn btn-outline-success">
+        <a href="/bank.com/card-number" class="btn btn-dark btn-sm">Cancel</a>
     </label>
 
 </form>
