@@ -3,6 +3,7 @@ package com.bank.atm.web;
 import com.bank.atm.model.Account;
 import com.bank.atm.repositories.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Random;
 
 @Controller
@@ -36,12 +38,6 @@ public class AccountsController {
         return "redirect:/";
     }
 
-//    @GetMapping("/bank.com/card-number")
-//    public String withdrawal(Model model) {
-//        List<Account> accountsList = accounts.findAll();
-//        model.addAttribute("accountsList", accountsList);
-//        return "card_number";
-//    }
 
     @GetMapping("/bank.com/card-number")
     public String showNumberForm() {
@@ -63,17 +59,22 @@ public class AccountsController {
         return "pin";
     }
 
-//    @GetMapping("/bank.com/pin")
-//    public String showPinForm() {
-//        return "pin";
-//    }
+    @GetMapping("/bank.com/pin")
+    public String showPinForm(@ModelAttribute("form")
+                                          PinForm form) {
+        return "pin";
+    }
 
     @PostMapping("/bank.com/pin")
-    public String handlePinForm(@RequestParam String pin) {
-        Account account = accounts.findAccountByNumberAndPin(currentNumber, pin);
-
-        if (account== null) {
-            //result.addError(new FieldError("account", "pin", "Wrong PIN-code"));
+    public String handlePinForm(@ModelAttribute("form")
+                                    @Valid
+                                            PinForm form,
+                                BindingResult result) {
+        Account account = accounts.findAccountByNumber(currentNumber);
+        if (!account.getPin().equals(form.getPin())) {
+            result.addError(new FieldError("form", "pin", "Неверный PIN"));
+        }
+        if (result.hasErrors()) {
             return "pin";
         }
         return "amount";
@@ -86,7 +87,7 @@ public class AccountsController {
     }
 
     @PostMapping("/bank.com/amount")
-    public String handleAmountForm(@RequestParam Integer sum) {
+    public String handleAmountForm(@RequestParam (required = false, defaultValue = "10") Integer sum) {
         if (accounts.findAccountByNumber(currentNumber).getBalance() - sum < 0) {
             throw new IllegalStateException("Not enough money to debit");
         }
@@ -104,6 +105,11 @@ public class AccountsController {
     @PostMapping("/bank.com/success")
     public String handleSuccessPage() {
         return "success";
+    }
+
+    @ModelAttribute("form")
+    public PinForm createDefault() {
+        return new PinForm();
     }
 
 }
