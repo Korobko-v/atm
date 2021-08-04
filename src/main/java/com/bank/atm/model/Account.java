@@ -24,9 +24,9 @@ public class Account {
     private String number;
 
     @Column
-    @Size(min = 4, max = 4, message = "PIN should cosist of 4 digits")
+    @Size(min = 4, max = 4, message = "PIN должен состоять из 4 цифр")
     @Pattern(regexp = "[0-9]*",
-            message = "PIN should consist of digits")
+            message = "PIN должен состоять из цифр")
     private String pin;
 
     @Column

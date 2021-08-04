@@ -3,10 +3,7 @@ package com.bank.atm.web;
 import com.bank.atm.model.Account;
 import com.bank.atm.repositories.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
@@ -54,8 +51,6 @@ public class AccountsController {
                 return "card_number";
             }
             currentNumber = number;
-//        accountsSession.setAccountId(account.getId());
-//        accountsSession.setNumber(account.getNumber());
         return "pin";
     }
 
@@ -81,20 +76,26 @@ public class AccountsController {
     }
 
     @GetMapping("/bank.com/amount")
-    public String showAmountForm() {
+    public String showAmountForm(@ModelAttribute("amountForm")
+                                             AmountForm amountForm) {
 
         return "amount";
     }
 
     @PostMapping("/bank.com/amount")
-    public String handleAmountForm(@RequestParam (required = false, defaultValue = "10") Integer sum) {
-        if (accounts.findAccountByNumber(currentNumber).getBalance() - sum < 0) {
-            throw new IllegalStateException("Not enough money to debit");
+    public String handleAmountForm(@ModelAttribute("amountForm")
+                                       @Valid
+                                               AmountForm amountForm,
+                                   BindingResult result) {
+        if (accounts.findAccountByNumber(currentNumber).getBalance() - amountForm.getAmount() < 0) {
+            result.addError(new FieldError("amountForm", "amount", "Недостаточно средств"));
         }
-        accounts.debit(accounts.findAccountByNumber(currentNumber), sum);
 
-//        accounts.findAccountByNumber(currentNumber).setBalance(balance);
-//        model.addAttribute("balance", accounts.findAccountByNumber(currentNumber).getBalance());
+        if (result.hasErrors()) {
+            return "amount";
+        }
+        accounts.debit(accounts.findAccountByNumber(currentNumber), amountForm.getAmount());
+
         return "success";
     }
 
@@ -108,9 +109,15 @@ public class AccountsController {
     }
 
 
+
     @ModelAttribute("form")
     public PinForm createDefault() {
         return new PinForm();
+    }
+
+    @ModelAttribute("amountForm")
+    public AmountForm createDefaultAmountForm() {
+        return new AmountForm();
     }
 
 }

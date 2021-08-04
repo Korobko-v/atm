@@ -3,10 +3,10 @@
 <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/5.0.1/css/bootstrap.css">
 
 <body>
-<form method="post" action="/bank.com/amount" name = amount>
+<form method="post" action="/bank.com/amount" name = "amount" enctype="application/x-www-form-urlencoded" th:object="${amountForm}">
     <label>Сумма:
-        <input type="number" name="amount">
-
+        <input type="number" name="amount" th:value="${amountForm.amount}" class="form-control">
+        <div th:each="error : ${#fields.errors('amount')}" th:text="${error}" class="alert alert-danger" role="alert"></div>
         <p>
         <label>
         <input type="button" class="fbutton"
