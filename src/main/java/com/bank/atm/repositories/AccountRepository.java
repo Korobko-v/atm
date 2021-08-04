@@ -3,16 +3,11 @@ package com.bank.atm.repositories;
 import com.bank.atm.model.Account;
 import lombok.SneakyThrows;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 
 @Repository
-@RepositoryRestResource(
-        collectionResourceRel = "doctors",
-        itemResourceRel = "doctor"
-)
 public interface AccountRepository extends JpaRepository<Account, Integer> {
 
     @SneakyThrows
