@@ -8,7 +8,9 @@
         <label>
         <input type="password" name="pin" th:value="${form.pin}" class="form-control">
         </label>
+
         <div th:each="error : ${#fields.errors('pin')}" th:text="${error}" class="alert alert-danger" role="alert"></div>
+
         <p>
             <label>
                 <input type="button" class="fbutton"

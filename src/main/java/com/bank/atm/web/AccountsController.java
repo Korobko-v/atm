@@ -107,6 +107,7 @@ public class AccountsController {
         return "success";
     }
 
+
     @ModelAttribute("form")
     public PinForm createDefault() {
         return new PinForm();
